@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LabProject.DAL.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +34,7 @@ namespace LabProject
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<DatabaseConnection>(_ => { new DatabaseConnection(Configuration.GetConnectionString("Employees")); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

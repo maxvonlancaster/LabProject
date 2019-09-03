@@ -18,6 +18,15 @@ namespace LabProject.DAL.ADONetRepositories
             _databaseConnection = databaseConnection;
         }
 
+        public string GetEmployee(int id)
+        {
+            using (var connection = new SqlConnection(_databaseConnection.ConnectionString))
+            {
+
+            }
+            throw new NotImplementedException();
+        }
+
         public List<string> GetEmployees()
         {
             using (var connection = new SqlConnection(_databaseConnection.ConnectionString))
@@ -41,5 +50,7 @@ namespace LabProject.DAL.ADONetRepositories
                 }
             }
         }
+
+
     }
 }

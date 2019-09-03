@@ -7,5 +7,7 @@ namespace LabProject.DAL.ADONetRepositories.Interfaces
     interface IEmployeeRepository
     {
         List<string> GetEmployees();
+
+        string GetEmployee(int id);
     }
 }

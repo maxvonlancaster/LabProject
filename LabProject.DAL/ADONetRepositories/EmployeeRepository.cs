@@ -22,9 +22,28 @@ namespace LabProject.DAL.ADONetRepositories
         {
             using (var connection = new SqlConnection(_databaseConnection.ConnectionString))
             {
-
+                var queryString = "SELECT FirstName FROM Employees WHERE Id = @Id";
+                var parameter = new SqlParameter("@Id", id);
+                var sqlCommand = new SqlCommand(queryString, connection);
+                try
+                {
+                    connection.Open();
+                    sqlCommand.Parameters.Add(parameter);
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        return reader[0].ToString();
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
             }
-            throw new NotImplementedException();
         }
 
         public List<string> GetEmployees()
@@ -32,7 +51,7 @@ namespace LabProject.DAL.ADONetRepositories
             using (var connection = new SqlConnection(_databaseConnection.ConnectionString))
             {
                 List<string> employees = new List<string>();
-                var queryString = "SELECT FirstName FROM Employees";
+                var queryString = "SELECT LastName FROM Employees";
                 var sqlCommand = new SqlCommand(queryString, connection);
                 try
                 {

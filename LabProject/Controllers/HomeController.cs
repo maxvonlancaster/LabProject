@@ -5,14 +5,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LabProject.Models;
+using LabProject.DAL.ADONetRepositories.Interfaces;
+using LabProject.DAL.ADONetRepositories;
+using LabProject.DAL.Services;
 
 namespace LabProject.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IProjectRepository _projectRepository;
+        private readonly IEmployeeRepository _employeeRepository;
+
+        public HomeController(IProjectRepository projectRepository, IEmployeeRepository employeeRepository)
+        {
+            _projectRepository = projectRepository;
+            _employeeRepository = employeeRepository;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var connection = new DatabaseConnection("Server=LAPTOP-2M0GJS3G\\SQLEXPRESS;Database=Employees;Trusted_Connection=True");
+            var repository = new ProjectRepository(connection);
+
+            var projects = repository.GetProjects();
+            ViewData["Message"] = projects;
+            return View(ViewData);
         }
 
         public IActionResult About()

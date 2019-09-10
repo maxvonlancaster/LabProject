@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using LabProject.Services;
+using LabProject.DAL.Services.Interfaces;
 
 namespace LabProject
 {
@@ -34,7 +36,9 @@ namespace LabProject
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.Configure<DatabaseConnection>(_ => { new DatabaseConnection(Configuration.GetConnectionString("Employees")); });
+            //services.Configure<DatabaseConnection>(_ => { new DatabaseConnection(Configuration.GetConnectionString("Employees")); });
+            services.AddSingleton<IDatabaseConnection>(provider => new DatabaseConnection(Configuration.GetConnectionString("Employees")));
+            services.ConfigureServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

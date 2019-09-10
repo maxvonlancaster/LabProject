@@ -6,14 +6,15 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Data;
 using System.Runtime;
+using LabProject.DAL.Services.Interfaces;
 
 namespace LabProject.DAL.ADONetRepositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly DatabaseConnection _databaseConnection;
+        private readonly IDatabaseConnection _databaseConnection;
 
-        public EmployeeRepository(DatabaseConnection databaseConnection)
+        public EmployeeRepository(IDatabaseConnection databaseConnection)
         {
             _databaseConnection = databaseConnection;
         }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LabProject.DAL.ADONetRepositories.Interfaces
 {
-    interface IEmployeeRepository
+    public interface IEmployeeRepository
     {
         List<string> GetEmployees();
 
